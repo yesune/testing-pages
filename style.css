@@ -43,9 +43,11 @@ button {
 }
 
 #game-area {
+    display: flex;
     flex-grow: 1;
     border: 2px solid white;
     color: white;
+    flex-direction: column;
 }
 
 #library {
@@ -54,16 +56,53 @@ button {
 }
 
 .book {
-    width: 20px;
-    height: 100px;
+    width: 40px;
+    height: 200px;
     background-color: #ccc;
     border: 1px solid black;
     margin: 10px;
     /*transform: rotate(-90deg);*/
+    font-family: Arial;
+    font-size: 32px;
+    text-align: center;
+    align-self: auto;
     transform-origin: top left;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     text-align: center;
+    color: white;
+    -webkit-text-stroke: 1px black;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  .book-comp {
+    width: 200px;
+    height: 40px;
+    background-color: #ccc;
+    border: 1px solid black;
+    margin: 10px;
+    font-family: Arial;
+    font-size: 32px;
+    text-align: center;
+    align-self: auto;
+    text-orientation: mixed;
+    text-align: center;
+    color: white;
+    -webkit-text-stroke: 1px black;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  #compare-books {
+    display: flex;
+    flex-direction: row;
+    align-self: center; /* I dont know why these dont work tbh */
+    justify-self: center;
+  }
+
+  #compare-buttons {
+    align-self: center;
+    justify-self: center;
+
   }

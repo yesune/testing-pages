@@ -20,16 +20,16 @@ const capacity_text = document.querySelector("#capacity_text");
 const book_event = document.querySelector("#add-book");
 const library = document.querySelector("#library");
 
+const first_book_event = document.querySelector("#first_button");
+
 const time_text = document.querySelector("#time");
 
-// Loading in files
-//const reader = new FileReader();
-/* I dont know what this rawFile stuff really means
-   but I need it to load the names.txt file */
 
-read_file();
-
-
+window.onload = function() {
+  read_file();
+  requestAnimationFrame(gameLoop);
+  new_compare();
+}
 
 
 document.addEventListener("click", event => {
@@ -41,6 +41,8 @@ document.addEventListener("click", event => {
     capacity_text.textContent = "capacity is " + capacity;
   } else if (event.target == book_event) {
     addBook();
+  } else if (event.target == first_book_event) {
+    new_compare();
   }
 });
 
@@ -63,7 +65,7 @@ function gameLoop(timestamp){
   requestAnimationFrame(gameLoop);
 }
 
-requestAnimationFrame(gameLoop);
+
 
 function addBook() {
   var book = document.createElement("div");
@@ -104,8 +106,12 @@ function read_file() {
   }
 }
 
-function populateRankings(json) {
-  console.log(json);
+const first_book = document.querySelector("#first");
+const second_book = document.querySelector("#second");
+
+function new_compare() {
+  first_book.style.backgroundColor = getRandomColor();
+  second_book.style.backgroundColor = getRandomColor();
+  first_book.textContent = getRandomName();
+  second_book.textContent = getRandomName();
 }
-
-
