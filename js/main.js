@@ -86,31 +86,22 @@ function getRandomColor() {
 // Generates a random name for the book
 function getRandomName() {
   const random_index = Math.floor(Math.random() * names.length);
-  const random_name = name[random_index];
+  const random_name = names[random_index];
   console.log(random_name);
   return random_name;
 }
 
 function read_file() {
-  var rawFile = new XMLHttpRequest();
-  rawFile.open("get", "static/names.json");
-  rawFile.onload = () => {
-    try {
-      const json = JSON.parse(rawFile.responseText);
-      console.log("step 1")
-      populateRankings(json);
-    } catch (e) {
-        console.warn("Could not load json");
-    }
-    /*
-    if(rawFile.readyState === 4) {
-      if(rawFile.status === 200 || rawFile.status == 0) {
-        var names = rawFile.responseText.trim().split('\n');
-        console.log("success");
-      }
-    }*/
-  };
-  rawFile.send();
+  try {
+    fetch('./js/static/names.json')
+      .then(response => response.json())
+      .then(data => {
+        names = data.names;
+        })
+      .catch(error => console.log(error));
+  } catch (e) {
+    console.warn("Could not load json");
+  }
 }
 
 function populateRankings(json) {
