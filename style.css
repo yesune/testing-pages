@@ -47,3 +47,23 @@ button {
     border: 2px solid white;
     color: white;
 }
+
+#library {
+    display: flex;
+    flex-direction: row;
+}
+
+.book {
+    width: 20px;
+    height: 100px;
+    background-color: #ccc;
+    border: 1px solid black;
+    margin: 10px;
+    /*transform: rotate(-90deg);*/
+    transform-origin: top left;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+  }

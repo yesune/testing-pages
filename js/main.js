@@ -3,6 +3,8 @@ let secondsPassed;
 let oldTimestamp = 10;
 let fps;
 
+let names = []; // array of possible names generated
+
 const initial_speed = 1;
 const initial_capacity = 10;
 
@@ -15,7 +17,18 @@ const speed_text = document.querySelector("#speed_text");
 const capacity_event = document.querySelector("#capacity");
 const capacity_text = document.querySelector("#capacity_text");
 
+const book_event = document.querySelector("#add-book");
+const library = document.querySelector("#library");
+
 const time_text = document.querySelector("#time");
+
+// Loading in files
+//const reader = new FileReader();
+/* I dont know what this rawFile stuff really means
+   but I need it to load the names.txt file */
+read_file();
+
+
 
 
 document.addEventListener("click", event => {
@@ -25,8 +38,12 @@ document.addEventListener("click", event => {
   } else if (event.target == capacity_event) {
     capacity++;
     capacity_text.textContent = "capacity is " + capacity;
+  } else if (event.target == book_event) {
+    addBook();
   }
 });
+
+
 
 function gameLoop(timestamp){
   const timeElapsed = performance.now();
@@ -36,7 +53,7 @@ function gameLoop(timestamp){
   
   fps = Math.round(1 / secondsPassed);
 
-  fpsEl.textContent = "FPS: fps";
+  fpsEl.textContent = "FPS: " + fps;
 
   
   speed += secondsPassed;
@@ -47,3 +64,43 @@ function gameLoop(timestamp){
 
 requestAnimationFrame(gameLoop);
 
+function addBook() {
+  var book = document.createElement("div");
+  book.className = "book";
+  book.style.backgroundColor = getRandomColor();
+  book.textContent = getRandomName();
+  library.appendChild(book);
+}
+
+// Generates a random color, necessary for library books to appear unique
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+// Generates a random name for the book
+function getRandomName() {
+  const random_index = Math.floor(Math.random() * names.length);
+  const random_name = name[random_index];
+  console.log(random_name);
+  return random_name;
+}
+
+function read_file(file) {
+  var rawFile = new XMLHttpRequest();
+  rawFile.open("GET", "static/names.json", false);
+  rawFile.onreadystatechange = function () {
+    if(rawFile.readyState === 4) {
+      if(rawFile.status === 200 || rawFile.status == 0) {
+        var names = rawFile.responseText.trim().split('\n');
+        console.log("success");
+      }
+    }
+  }
+  rawFile.send(null); // I don't know what this does sadly
+  return names;
+}
