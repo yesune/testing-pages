@@ -21,7 +21,12 @@ button {
     margin-bottom: 5px;
 }
 
-#menu { 
+#area {
+    display: flex;
+    flex-direction: row;
+}
+
+#menu {
     border: 2px solid white;
     border-radius: 10px;
     
@@ -35,5 +40,10 @@ button {
     font-family: Arial;
     color: white;
     margin: 0 auto;
-    
+}
+
+#game-area {
+    flex-grow: 1;
+    border: 2px solid white;
+    color: white;
 }
