@@ -26,6 +26,7 @@ const time_text = document.querySelector("#time");
 //const reader = new FileReader();
 /* I dont know what this rawFile stuff really means
    but I need it to load the names.txt file */
+
 read_file();
 
 
@@ -90,17 +91,30 @@ function getRandomName() {
   return random_name;
 }
 
-function read_file(file) {
+function read_file() {
   var rawFile = new XMLHttpRequest();
-  rawFile.open("GET", "static/names.json", false);
-  rawFile.onreadystatechange = function () {
+  rawFile.open("get", "static/names.json");
+  rawFile.onload = () => {
+    try {
+      const json = JSON.parse(rawFile.responseText);
+      console.log("step 1")
+      populateRankings(json);
+    } catch (e) {
+        console.warn("Could not load json");
+    }
+    /*
     if(rawFile.readyState === 4) {
       if(rawFile.status === 200 || rawFile.status == 0) {
         var names = rawFile.responseText.trim().split('\n');
         console.log("success");
       }
-    }
-  }
-  rawFile.send(null); // I don't know what this does sadly
-  return names;
+    }*/
+  };
+  rawFile.send();
 }
+
+function populateRankings(json) {
+  console.log(json);
+}
+
+
